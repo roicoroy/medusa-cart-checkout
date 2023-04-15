@@ -65,16 +65,6 @@ const plugins = [
       secure: true,
     },
   },
-  // {
-  //   resolve: `medusa-plugin-strapi`,
-  //   options: {
-  //     strapi_medusa_user: process.env.STRAPI_USER,
-  //     strapi_medusa_password: process.env.STRAPI_PASSWORD,
-  //     strapi_url: process.env.STRAPI_URL,
-  //     strapi_port: process.env.STRAPI_PORT,
-  //     strapi_protocol: process.env.STRAPI_PROTOCOL
-  //   }
-  // },
 ];
 
 const modules = {
@@ -96,10 +86,10 @@ const modules = {
 const projectConfig = {
   jwtSecret: process.env.JWT_SECRET,
   cookieSecret: process.env.COOKIE_SECRET,
-  database_database: "./medusa-db.sql",
-  // database_type: DATABASE_TYPE,
-  database_type: 'sqlite',
-  store_cors: process.env.STORE_CORS,
+  database_database: process.env.DATABASE_URL,
+  database_type: process.env.DATABASE_TYPE,
+  store_cors:
+    "https://medusa.loca.lt,http://localhost:8000,http://localhost:8001,capacitor://localhost,http://localhost",
   admin_cors: process.env.ADMIN_CORS,
   // Uncomment the following lines to enable REDIS
   // redis_url: process.env.REDIS_URL

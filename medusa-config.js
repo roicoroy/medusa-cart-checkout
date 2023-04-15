@@ -1,3 +1,5 @@
+/** @format */
+
 const dotenv = require("dotenv");
 
 let ENV_FILE_NAME = "";
@@ -22,8 +24,7 @@ try {
 } catch (e) {}
 
 // CORS when consuming Medusa from admin
-const ADMIN_CORS =
-  process.env.ADMIN_CORS;
+const ADMIN_CORS = process.env.ADMIN_CORS;
 
 // CORS to avoid issues when consuming Medusa from a client
 const STORE_CORS = process.env.STORE_CORS;
@@ -64,7 +65,7 @@ const plugins = [
       secure: true,
     },
   },
-    // {
+  // {
   //   resolve: `medusa-plugin-strapi`,
   //   options: {
   //     strapi_medusa_user: process.env.STRAPI_USER,
@@ -77,41 +78,41 @@ const plugins = [
 ];
 
 const modules = {
-  /*eventBus: {
-    resolve: "@medusajs/event-bus-redis",
-    options: {
-      redisUrl: REDIS_URL
-    }
-  },
-  cacheService: {
-    resolve: "@medusajs/cache-redis",
-    options: {
-      redisUrl: REDIS_URL
-    }
-  },*/
-}
+  // eventBus: {
+  //   resolve: "@medusajs/event-bus-redis",
+  //   options: {
+  //     redisUrl: REDIS_URL,
+  //   },
+  // },
+  // cacheService: {
+  //   resolve: "@medusajs/cache-redis",
+  //   options: {
+  //     redisUrl: REDIS_URL,
+  //   },
+  // },
+};
 
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
 const projectConfig = {
   jwtSecret: process.env.JWT_SECRET,
   cookieSecret: process.env.COOKIE_SECRET,
   database_database: "./medusa-db.sql",
-  database_type: DATABASE_TYPE,
-  store_cors: STORE_CORS,
-  admin_cors: ADMIN_CORS,
+  // database_type: DATABASE_TYPE,
+  database_type: 'sqlite',
+  store_cors: process.env.STORE_CORS,
+  admin_cors: process.env.ADMIN_CORS,
   // Uncomment the following lines to enable REDIS
-  // redis_url = REDIS_URL
-}
+  // redis_url: process.env.REDIS_URL
+};
 
-if (DATABASE_URL && DATABASE_TYPE === "postgres") {
+if (DATABASE_URL && DATABASE_TYPE === "sqlite") {
   projectConfig.database_url = DATABASE_URL;
   delete projectConfig["database_database"];
 }
-
 
 /** @type {import('@medusajs/medusa').ConfigModule} */
 module.exports = {
   projectConfig,
   plugins,
-	modules,
+  modules,
 };

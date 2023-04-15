@@ -17,6 +17,7 @@
     "build": "npm run clean && tsc -p tsconfig.json",
     "watch": "tsc --watch",
     "test": "jest",
+    "lt": "lt --port 9000 --subdomain medusa",
     "seed": "medusa seed -f ./data/seed.json",
     "start": "npm run build && medusa start",
     "dev": "npm run build && medusa develop",

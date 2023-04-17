@@ -68,32 +68,51 @@ const plugins = [
 ];
 
 const modules = {
-  // eventBus: {
-  //   resolve: "@medusajs/event-bus-redis",
-  //   options: {
-  //     redisUrl: REDIS_URL,
-  //   },
-  // },
-  // cacheService: {
-  //   resolve: "@medusajs/cache-redis",
-  //   options: {
-  //     redisUrl: REDIS_URL,
-  //   },
-  // },
-};
+  /*eventBus: {
+    resolve: "@medusajs/event-bus-redis",
+    options: {
+      redisUrl: REDIS_URL
+    }
+  },
+  cacheService: {
+    resolve: "@medusajs/cache-redis",
+    options: {
+      redisUrl: REDIS_URL
+    }
+  },*/
+}
+
+// Extend project configuration with Microtica specific configuration logic
+const projectConfigExt = process.env.PRODUCTION === "true" ?
+  // Production configuration
+  {
+    database_database: "./.tmp/medusa-db.sql",
+    database_type: "sqlite"
+  } :
+  // {
+  //   redis_url: REDIS_URL,
+  //   database_url: DATABASE_URL,
+  //   database_type: "postgres"
+  // } :
+  // Development configuration
+  {
+    database_database: "./.tmp/medusa-db.sql",
+    database_type: "sqlite"
+  }
 
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
 const projectConfig = {
   jwtSecret: process.env.JWT_SECRET,
   cookieSecret: process.env.COOKIE_SECRET,
-  database_database: process.env.DATABASE_URL,
-  database_type: process.env.DATABASE_TYPE,
-  store_cors:
-    "https://medusa.loca.lt,http://localhost:8000,http://localhost:8001,capacitor://localhost,http://localhost",
-  admin_cors: process.env.ADMIN_CORS,
+  // database_database: "./medusa-db.sql",
+  // database_type: DATABASE_TYPE,
+  store_cors: STORE_CORS,
+  admin_cors: ADMIN_CORS,
   // Uncomment the following lines to enable REDIS
-  // redis_url: process.env.REDIS_URL
-};
+  // redis_url = REDIS_URL
+
+  ...projectConfigExt
+}
 
 if (DATABASE_URL && DATABASE_TYPE === "sqlite") {
   projectConfig.database_url = DATABASE_URL;

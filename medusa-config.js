@@ -42,13 +42,13 @@ const plugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
   // To enable the admin plugin, uncomment the following lines and run `yarn add @medusajs/admin`
-  // {
-  //   resolve: "@medusajs/admin",
-  //   /** @type {import('@medusajs/admin').PluginOptions} */
-  //   options: {
-  //     autoRebuild: true,
-  //   },
-  // },
+  {
+    resolve: "@medusajs/admin",
+    /** @type {import('@medusajs/admin').PluginOptions} */
+    options: {
+      autoRebuild: true,
+    },
+  },
   {
     resolve: `medusa-payment-stripe`,
     options: {
@@ -83,17 +83,17 @@ const modules = {
 }
 
 // Extend project configuration with Microtica specific configuration logic
-const projectConfigExt = process.env.PRODUCTION === "true" ?
+const projectConfigExt = process.env.PRODUCTION === "false" ?
   // Production configuration
-  {
-    database_database: "./.tmp/medusa-db.sql",
-    database_type: "sqlite"
-  } :
   // {
-  //   redis_url: REDIS_URL,
-  //   database_url: DATABASE_URL,
-  //   database_type: "postgres"
+  //   database_database: "./.tmp/medusa-db.sql",
+  //   database_type: "sqlite"
   // } :
+  {
+    redis_url: REDIS_URL,
+    database_url: DATABASE_URL,
+    database_type: "postgres"
+  } :
   // Development configuration
   {
     database_database: "./.tmp/medusa-db.sql",

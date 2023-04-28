@@ -19,7 +19,7 @@
     "test": "jest",
     "lt": "lt --port 9000 --subdomain medusa",
     "seed": "medusa seed -f ./data/seed.json",
-    "start": "npm run build && npm run seed && medusa start",
+    "start": "npm run build && rimraf /tmp/medusa-db.sql && npm run seed && medusa start",
     "dev": "npm run build && medusa develop",
     "build:admin": "medusa-admin build"
   },

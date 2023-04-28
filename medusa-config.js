@@ -82,41 +82,17 @@ const modules = {
   },*/
 }
 
-// Extend project configuration with Microtica specific configuration logic
-const projectConfigExt = process.env.PRODUCTION === "false" ?
-  // Production configuration
-  // {
-  //   database_database: "./.tmp/medusa-db.sql",
-  //   database_type: "sqlite"
-  // } :
-  {
-    redis_url: REDIS_URL,
-    database_url: DATABASE_URL,
-    database_type: "postgres"
-  } :
-  // Development configuration
-  {
-    database_database: "./.tmp/medusa-db.sql",
-    database_type: "sqlite"
-  }
-
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
 const projectConfig = {
   jwtSecret: process.env.JWT_SECRET,
   cookieSecret: process.env.COOKIE_SECRET,
-  // database_database: "./medusa-db.sql",
+  database_database: "./tmp/medusa-db.sql",
+  database_type: 'sqlite',
   // database_type: DATABASE_TYPE,
   store_cors: STORE_CORS,
   admin_cors: ADMIN_CORS,
   // Uncomment the following lines to enable REDIS
   // redis_url = REDIS_URL
-
-  ...projectConfigExt
-}
-
-if (DATABASE_URL && DATABASE_TYPE === "postgres") {
-  projectConfig.database_url = DATABASE_URL;
-  delete projectConfig["database_database"];
 }
 
 /** @type {import('@medusajs/medusa').ConfigModule} */

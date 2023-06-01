@@ -1,5 +1,3 @@
-/** @format */
-
 const dotenv = require("dotenv");
 
 let ENV_FILE_NAME = "";
@@ -24,36 +22,32 @@ try {
 } catch (e) {}
 
 // CORS when consuming Medusa from admin
-const ADMIN_CORS = process.env.ADMIN_CORS;
+const ADMIN_CORS =
+  process.env.ADMIN_CORS || "http://192.168.1.183:8100,http://192.168.1.183:8101,http://localhost:7000,http://localhost:7001";
 
 // CORS to avoid issues when consuming Medusa from a client
-const STORE_CORS = process.env.STORE_CORS;
+const STORE_CORS = process.env.STORE_CORS || '';
 
-const DATABASE_TYPE = process.env.DATABASE_TYPE;
-const DATABASE_URL = process.env.DATABASE_URL;
-// Medusa uses Redis, so this needs configuration as well
-const REDIS_URL = process.env.REDIS_URL;
-
-// Stripe keys
-const STRIPE_API_KEY = process.env.STRIPE_API_KEY;
-const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET;
+const DATABASE_TYPE = process.env.DATABASE_TYPE || 'postgres';
+const DATABASE_URL = process.env.DATABASE_URL || 'postgres://ricardobento:0000@localhost:5436/postgres';
+const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
 
 const plugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
   // To enable the admin plugin, uncomment the following lines and run `yarn add @medusajs/admin`
-  // {
-  //   resolve: "@medusajs/admin",
-  //   /** @type {import('@medusajs/admin').PluginOptions} */
-  //   options: {
-  //     autoRebuild: true,
-  //   },
-  // },
+  {
+    resolve: "@medusajs/admin",
+    /** @type {import('@medusajs/admin').PluginOptions} */
+    options: {
+      autoRebuild: true,
+    },
+  },
   {
     resolve: `medusa-payment-stripe`,
     options: {
-      api_key: STRIPE_API_KEY,
-      webhook_secret: STRIPE_WEBHOOK_SECRET,
+      api_key: process.env.STRIPE_API_KEY,
+      webhook_secret: process.env.STRIPE_WEBHOOK_SECRET,
     },
   },
   {
@@ -68,7 +62,7 @@ const plugins = [
 ];
 
 const modules = {
-  /*eventBus: {
+  eventBus: {
     resolve: "@medusajs/event-bus-redis",
     options: {
       redisUrl: REDIS_URL
@@ -79,25 +73,30 @@ const modules = {
     options: {
       redisUrl: REDIS_URL
     }
-  },*/
+  },
 }
 
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
 const projectConfig = {
   jwtSecret: process.env.JWT_SECRET,
   cookieSecret: process.env.COOKIE_SECRET,
-  database_database: "./tmp/medusa-db.sql",
-  database_type: 'sqlite',
-  // database_type: DATABASE_TYPE,
-  store_cors: STORE_CORS,
+  database_database: "./medusa-db.sql",
+  database_type: DATABASE_TYPE,
+  store_cors: 'https://04c1-2a00-23c7-dc8c-301-e481-29eb-8d16-a739.ngrok-free.app,http://192.168.1.183:8100,http://192.168.1.183:8101,http://localhost:8100,http://localhost:8101,capacitor://localhost',
   admin_cors: ADMIN_CORS,
   // Uncomment the following lines to enable REDIS
-  // redis_url = REDIS_URL
+  redis_url: REDIS_URL
 }
+
+if (DATABASE_URL && DATABASE_TYPE === "postgres") {
+  projectConfig.database_url = DATABASE_URL;
+  delete projectConfig["database_database"];
+}
+
 
 /** @type {import('@medusajs/medusa').ConfigModule} */
 module.exports = {
   projectConfig,
   plugins,
-  modules,
+	modules,
 };

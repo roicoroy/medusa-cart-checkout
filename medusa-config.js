@@ -78,13 +78,14 @@ const modules = {
 
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
 const projectConfig = {
-  jwtSecret: process.env.JWT_SECRET,
-  cookieSecret: process.env.COOKIE_SECRET,
-  database_database: "./medusa-db.sql",
-  database_type: DATABASE_TYPE,
-  store_cors: STORE_CORS,
-  admin_cors: ADMIN_CORS,
-  // redis_url: REDIS_URL
+  
+  // jwtSecret: process.env.JWT_SECRET,
+  // cookieSecret: process.env.COOKIE_SECRET,
+  // database_database: "./medusa-db.sql",
+  // database_type: DATABASE_TYPE,
+  // store_cors: STORE_CORS,
+  // admin_cors: ADMIN_CORS,
+  // // redis_url: REDIS_URL
 }
 
 if (DATABASE_URL && DATABASE_TYPE === "postgres") {
@@ -94,8 +95,18 @@ if (DATABASE_URL && DATABASE_TYPE === "postgres") {
 
 
 /** @type {import('@medusajs/medusa').ConfigModule} */
+// module.exports = {
+//   projectConfig,
+//   plugins,
+//   // modules,
+// };
 module.exports = {
-  projectConfig,
+  projectConfig: {
+    redis_url: REDIS_URL,
+    database_url: DATABASE_URL,
+    database_type: "postgres",
+    store_cors: STORE_CORS,
+    admin_cors: ADMIN_CORS,
+  },
   plugins,
-  // modules,
 };

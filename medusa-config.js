@@ -19,14 +19,14 @@ switch (process.env.NODE_ENV) {
 
 try {
   dotenv.config({ path: process.cwd() + "/" + ENV_FILE_NAME });
-} catch (e) {}
+} catch (e) { }
 
 // CORS when consuming Medusa from admin
 const ADMIN_CORS =
   process.env.ADMIN_CORS || "http://192.168.1.183:8100,http://192.168.1.183:8101,http://localhost:7000,http://localhost:7001";
 
 // CORS to avoid issues when consuming Medusa from a client
-const STORE_CORS = process.env.STORE_CORS || '';
+const STORE_CORS = process.env.STORE_CORS || '193.34.76.44:443,https://6263-2a00-23c7-dc8c-301-29ff-cb9c-79f-82ec.ngrok-free.app,http://localhost:8100,http://localhost:8101,capacitor://localhost';
 
 const DATABASE_TYPE = process.env.DATABASE_TYPE || 'postgres';
 const DATABASE_URL = process.env.DATABASE_URL || 'postgres://ricardobento:0000@localhost:5436/postgres';
@@ -82,9 +82,8 @@ const projectConfig = {
   cookieSecret: process.env.COOKIE_SECRET,
   database_database: "./medusa-db.sql",
   database_type: DATABASE_TYPE,
-  store_cors: 'https://04c1-2a00-23c7-dc8c-301-e481-29eb-8d16-a739.ngrok-free.app,http://192.168.1.183:8100,http://192.168.1.183:8101,http://localhost:8100,http://localhost:8101,capacitor://localhost',
+  store_cors: STORE_CORS,
   admin_cors: ADMIN_CORS,
-  // Uncomment the following lines to enable REDIS
   redis_url: REDIS_URL
 }
 
@@ -98,5 +97,5 @@ if (DATABASE_URL && DATABASE_TYPE === "postgres") {
 module.exports = {
   projectConfig,
   plugins,
-	modules,
+  modules,
 };

@@ -97,5 +97,5 @@ if (DATABASE_URL && DATABASE_TYPE === "postgres") {
 module.exports = {
   projectConfig,
   plugins,
-  modules,
+  // modules,
 };

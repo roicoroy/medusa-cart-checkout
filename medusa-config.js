@@ -102,7 +102,7 @@ if (DATABASE_URL && DATABASE_TYPE === "postgres") {
 // };
 module.exports = {
   projectConfig: {
-    redis_url: REDIS_URL,
+    // redis_url: REDIS_URL,
     database_url: DATABASE_URL,
     database_type: "postgres",
     store_cors: STORE_CORS,

@@ -23,14 +23,14 @@ try {
 
 // CORS when consuming Medusa from admin
 const ADMIN_CORS =
-  process.env.ADMIN_CORS || "http://192.168.1.183:8100,http://192.168.1.183:8101,http://localhost:7000,http://localhost:7001";
+  process.env.ADMIN_CORS;
 
 // CORS to avoid issues when consuming Medusa from a client
-const STORE_CORS = process.env.STORE_CORS || '193.34.76.44:443,https://6263-2a00-23c7-dc8c-301-29ff-cb9c-79f-82ec.ngrok-free.app,http://localhost:8100,http://localhost:8101,capacitor://localhost';
+const STORE_CORS = process.env.STORE_CORS;
 
-const DATABASE_TYPE = process.env.DATABASE_TYPE || 'postgres';
-const DATABASE_URL = process.env.DATABASE_URL || 'postgres://ricardobento:0000@localhost:5436/postgres';
-const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
+const DATABASE_TYPE = process.env.DATABASE_TYPE;
+const DATABASE_URL = process.env.DATABASE_URL;
+const REDIS_URL = process.env.REDIS_URL;
 
 const plugins = [
   `medusa-fulfillment-manual`,

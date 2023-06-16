@@ -1,25 +1,25 @@
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
 
-let ENV_FILE_NAME = "";
-switch (process.env.NODE_ENV) {
-  case "production":
-    ENV_FILE_NAME = ".env.production";
-    break;
-  case "staging":
-    ENV_FILE_NAME = ".env.staging";
-    break;
-  case "test":
-    ENV_FILE_NAME = ".env.test";
-    break;
-  case "development":
-  default:
-    ENV_FILE_NAME = ".env";
-    break;
-}
+// let ENV_FILE_NAME = "";
+// switch (process.env.NODE_ENV) {
+//   case "production":
+//     ENV_FILE_NAME = ".env.production";
+//     break;
+//   case "staging":
+//     ENV_FILE_NAME = ".env.staging";
+//     break;
+//   case "test":
+//     ENV_FILE_NAME = ".env.test";
+//     break;
+//   case "development":
+//   default:
+//     ENV_FILE_NAME = ".env";
+//     break;
+// }
 
-try {
-  dotenv.config({ path: process.cwd() + "/" + ENV_FILE_NAME });
-} catch (e) { }
+// try {
+//   dotenv.config({ path: process.cwd() + "/" + ENV_FILE_NAME });
+// } catch (e) { }
 
 // CORS when consuming Medusa from admin
 const ADMIN_CORS =
@@ -61,37 +61,37 @@ const plugins = [
   },
 ];
 
-const modules = {
-  // eventBus: {
-  //   resolve: "@medusajs/event-bus-redis",
-  //   options: {
-  //     redisUrl: REDIS_URL
-  //   }
-  // },
-  // cacheService: {
-  //   resolve: "@medusajs/cache-redis",
-  //   options: {
-  //     redisUrl: REDIS_URL
-  //   }
-  // },
-}
+// const modules = {
+//   // eventBus: {
+//   //   resolve: "@medusajs/event-bus-redis",
+//   //   options: {
+//   //     redisUrl: REDIS_URL
+//   //   }
+//   // },
+//   // cacheService: {
+//   //   resolve: "@medusajs/cache-redis",
+//   //   options: {
+//   //     redisUrl: REDIS_URL
+//   //   }
+//   // },
+// }
 
-/** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
-const projectConfig = {
+// /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
+// const projectConfig = {
   
-  // jwtSecret: process.env.JWT_SECRET,
-  // cookieSecret: process.env.COOKIE_SECRET,
-  // database_database: "./medusa-db.sql",
-  // database_type: DATABASE_TYPE,
-  // store_cors: STORE_CORS,
-  // admin_cors: ADMIN_CORS,
-  // // redis_url: REDIS_URL
-}
+//   // jwtSecret: process.env.JWT_SECRET,
+//   // cookieSecret: process.env.COOKIE_SECRET,
+//   // database_database: "./medusa-db.sql",
+//   // database_type: DATABASE_TYPE,
+//   // store_cors: STORE_CORS,
+//   // admin_cors: ADMIN_CORS,
+//   // // redis_url: REDIS_URL
+// }
 
-if (DATABASE_URL && DATABASE_TYPE === "postgres") {
-  projectConfig.database_url = DATABASE_URL;
-  delete projectConfig["database_database"];
-}
+// // if (DATABASE_URL && DATABASE_TYPE === "postgres") {
+// //   projectConfig.database_url = DATABASE_URL;
+// //   delete projectConfig["database_database"];
+// // }
 
 
 /** @type {import('@medusajs/medusa').ConfigModule} */

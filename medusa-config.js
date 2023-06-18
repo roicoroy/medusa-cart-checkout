@@ -50,7 +50,7 @@ const modules = {
 
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
 const projectConfig = {
-  redis_url: process.env.REDIS_URL,
+  // redis_url: process.env.REDIS_URL,
   database_url: process.env.DATABASE_URL,
   database_type: "postgres",
   store_cors: process.env.STORE_CORS,

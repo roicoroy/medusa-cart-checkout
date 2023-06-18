@@ -74,10 +74,10 @@ const projectConfig = {
   database_type: "postgres",
   store_cors: process.env.STORE_CORS,
   admin_cors: process.env.ADMIN_CORS,
-  // database_extra:
-  //   process.env.NODE_ENV !== "development"
-  //     ? { ssl: { rejectUnauthorized: false } }
-  //     : {},
+  database_extra:
+    process.env.NODE_ENV !== "development"
+      ? { ssl: { rejectUnauthorized: false } }
+      : {},
 };
 
 /** @type {import('@medusajs/medusa').ConfigModule} */

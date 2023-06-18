@@ -74,6 +74,13 @@ const projectConfig = {
   store_cors: STORE_CORS,
   database_url: DATABASE_URL,
   admin_cors: ADMIN_CORS,
+  database_type: 'postgres',
+  database_schema:'public',
+  database_extra: {
+      ssl: {
+          rejectUnauthorized: false
+      }
+  },
   // Uncomment the following lines to enable REDIS
   redis_url: REDIS_URL
 };

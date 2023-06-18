@@ -21,7 +21,7 @@
     "start": "npm run build:admin && cross-env medusa develop",
     "start:custom": "cross-env npm run build && node --preserve-symlinks index.js",
     "dev": "cross-env npm run build && medusa develop",
-    "build:admin": "cross-env medusa-admin build",
+    "build:admin": "node --max_old_space_size=2560 && npx medusa-admin build",
     "serve": "medusa start",
     "heroku-postbuild": "medusa migrations run",
     "prepare": "npm run build"

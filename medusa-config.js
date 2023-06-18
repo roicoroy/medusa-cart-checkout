@@ -1,12 +1,12 @@
 const plugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
-  // {
-  //   resolve: `@medusajs/file-local`,
-  //   options: {
-  //     upload_dir: "uploads",
-  //   },
-  // },
+  {
+    resolve: `@medusajs/file-local`,
+    options: {
+      upload_dir: "uploads",
+    },
+  },
   // To enable the admin plugin, uncomment the following lines and run `yarn add @medusajs/admin`.
   {
     resolve: "@medusajs/admin",
